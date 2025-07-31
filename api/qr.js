@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     qrConfig.logoMode = "clean";
   }
 
-  const apiUrl = https://api.qrcode-monkey.com/qr/custom;
+  const apiUrl = `https://api.qrcode-monkey.com/qr/custom`;
   const payload = {
     data,
     config: qrConfig,
