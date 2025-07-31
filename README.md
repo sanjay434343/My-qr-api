@@ -18,9 +18,9 @@ GET https://my-qr-api.vercel.app/api/qr
 |-------------|----------|--------------|-----------------------------------------------------------------------------|
 | `data`      | string   | **required** | The content to encode in the QR code (URL, text, etc).                     |
 | `nologo`    | boolean  | false        | If set to `"true"`, logo will be removed from the center.                  |
-| `body`      | string   | `"circular"` | QR body style.                                                             |
-| `eye`       | string   | `"frame12"`  | Outer eye style of the QR.                                                 |
-| `eyeBall`   | string   | `"ball14"`   | Inner eye style of the QR.                                                 |
+| `body`      | string   | `"circular"` | QR body style (see full list below).                                       |
+| `eye`       | string   | `"frame12"`  | Outer eye style (from `0` to `16`).                                        |
+| `eyeBall`   | string   | `"ball14"`   | Inner eye style (from `0` to `19`).                                        |
 | `bodyColor` | hex code | `#000000`    | Color of the QR body.                                                      |
 | `bgColor`   | hex code | `#ffffff`    | Background color of the QR code.                                           |
 
@@ -51,23 +51,60 @@ GET https://my-qr-api.vercel.app/api/qr
 ### 🔘 Custom colors and styles
 
 ```
-/api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&eye=frame2&eyeBall=ball2&body=dot
+/api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&eye=2&eyeBall=2&body=dot
 ```
 
-[▶️ Preview Custom QR](https://my-qr-api.vercel.app/api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&eye=frame2&eyeBall=ball2&body=dot)
+[▶️ Preview Custom QR](https://my-qr-api.vercel.app/api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&eye=2&eyeBall=2&body=dot)
 
 ---
 
 ## 🎨 QR Customization Styles
 
-### Body Styles
-- `circular`, `square`, `rounded`, `dot`, `extra-rounded`, etc.
+### 🧩 `body` Styles
 
-### Eye Styles
-- `frame0` to `frame14`
+```
+square  
+mosaic  
+dot  
+circle  
+circle-zebra  
+circle-zebra-vertical  
+circular  
+edge-cut  
+edge-cut-smooth  
+japnese  
+leaf  
+pointed  
+pointed-edge-cut  
+pointed-in  
+pointed-in-smooth  
+pointed-smooth  
+round  
+rounded-in  
+rounded-in-smooth  
+rounded-pointed  
+star
+```
 
-### EyeBall Styles
-- `ball0` to `ball14`
+### 👁️ `eye` Styles
+
+Use values from:
+
+```
+0 to 16
+```
+
+Example: `eye=0`, `eye=12`, `eye=16`
+
+### 👁️‍🗨️ `eyeBall` Styles
+
+Use values from:
+
+```
+0 to 19
+```
+
+Example: `eyeBall=0`, `eyeBall=14`, `eyeBall=19`
 
 ---
 
