@@ -1,6 +1,6 @@
 # 🎯 Custom QR Code API
 
-This is a **simple yet powerful** QR Code generator API built using Node.js and Axios. It acts as a middleware to generate styled QR codes using the [QRCode Monkey API](https://www.qrcode-monkey.com/). Optionally supports embedding a logo in the center.
+This is a **simple and customizable** QR Code generator API built using Node.js. It supports optional logo embedding and full visual customization via query parameters.
 
 ---
 
@@ -18,7 +18,7 @@ GET https://your-deployment-url.vercel.app/api/qr
 |-------------|----------|--------------|-----------------------------------------------------------------------------|
 | `data`      | string   | **required** | The content to encode in the QR code (URL, text, etc).                     |
 | `nologo`    | boolean  | false        | If set to `"true"`, logo will be removed from the center.                  |
-| `body`      | string   | `"circular"` | QR body style. [See styles](#🎨-qr-customization-styles)                   |
+| `body`      | string   | `"circular"` | QR body style.                                                             |
 | `eye`       | string   | `"frame12"`  | Outer eye style of the QR.                                                 |
 | `eyeBall`   | string   | `"ball14"`   | Inner eye style of the QR.                                                 |
 | `bodyColor` | hex code | `#000000`    | Color of the QR body.                                                      |
@@ -44,8 +44,6 @@ GET /api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&nologo=true
 
 ## 🎨 QR Customization Styles
 
-You can customize your QR using the following style options:
-
 ### Body Styles
 - `circular`, `square`, `rounded`, `dot`, `extra-rounded`, etc.
 
@@ -55,26 +53,6 @@ You can customize your QR using the following style options:
 ### EyeBall Styles
 - `ball0` to `ball14`
 
-> For the full list, check: [QRCode Monkey Styles](https://www.qrcode-monkey.com/qr-code-styling)
-
----
-
-## 🧠 How It Works
-
-This API sends a `POST` request to the official QRCode Monkey endpoint:
-
-```js
-POST https://api.qrcode-monkey.com/qr/custom
-```
-
-Payload includes:
-- Data to encode
-- Customization config
-- Optional logo
-- PNG output (300px)
-
-Returns: A ready-to-use PNG QR code image.
-
 ---
 
 ## 🚫 Error Responses
@@ -83,7 +61,7 @@ Returns: A ready-to-use PNG QR code image.
 |--------|-----------------------------|------------------------------------|
 | 400    | Missing 'data'              | No data parameter was provided.    |
 | 405    | Method not allowed          | Only `GET` requests are supported. |
-| 500    | QR generation failed        | Internal or external API failure.  |
+| 500    | QR generation failed        | Internal API failure.              |
 
 ---
 
@@ -95,7 +73,7 @@ Returns: A ready-to-use PNG QR code image.
 
 ## 📦 Deployment
 
-This API can be deployed easily on **Vercel** or any Node-compatible platform.
+This API can be deployed easily on **Vercel** or any Node-compatible server.
 
 > Place this file at: `/api/qr.js` for Vercel.
 
