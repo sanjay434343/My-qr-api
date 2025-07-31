@@ -1,5 +1,3 @@
-// File: api/qr.js
-
 import axios from "axios";
 
 export default async function handler(req, res) {
@@ -7,21 +5,33 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { data } = req.query;
+  const {
+    data,
+    nologo,
+    body = "circular",
+    eye = "frame12",
+    eyeBall = "ball14",
+    bodyColor = "#000000",
+    bgColor = "#ffffff"
+  } = req.query;
 
   if (!data) {
     return res.status(400).json({ error: "Missing 'data' query parameter" });
   }
 
   const qrConfig = {
-    body: "circular",
-    eye: "frame12",
-    eyeBall: "ball14",
-    bodyColor: "#000000",
-    bgColor: "#ffffff",
-    logo: "https://raw.githubusercontent.com/sanjay434343/My-qr-api/main/logo.png",
-    logoMode: "clean"
+    body,
+    eye,
+    eyeBall,
+    bodyColor,
+    bgColor
   };
+
+  // Add logo if nologo is NOT true
+  if (nologo !== "true") {
+    qrConfig.logo = "https://raw.githubusercontent.com/sanjay434343/My-qr-api/main/logo.png";
+    qrConfig.logoMode = "clean";
+  }
 
   const apiUrl = `https://api.qrcode-monkey.com/qr/custom`;
   const payload = {
@@ -33,7 +43,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await axios.post(apiUrl, payload, {
-      responseType: "arraybuffer", // to receive binary image data
+      responseType: "arraybuffer",
     });
 
     res.setHeader("Content-Type", "image/png");
