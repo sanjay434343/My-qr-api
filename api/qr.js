@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // ✅ Preflight check
+  // ✅ Preflight support
   if (req.method === "OPTIONS") return res.status(200).end();
 
   // ✅ Default QR config
@@ -15,7 +15,9 @@ export default async function handler(req, res) {
     eye: "frame12",
     eyeBall: "ball14",
     bodyColor: "#000000",
-    bgColor: "#ffffff"
+    bgColor: "#ffffff",
+    logo: "https://github.com/sanjay434343/My-qr-api/blob/main/logo.png?raw=true",
+    logoMode: "clean" // ✅ Rounded white background with logo
   };
 
   let data;
@@ -35,9 +37,11 @@ export default async function handler(req, res) {
   try {
     const encodedData = encodeURIComponent(data);
     const encodedConfig = encodeURIComponent(JSON.stringify(config));
+
     const url = `https://api.qrcode-monkey.com/qr/custom?data=${encodedData}&size=300&file=png&config=${encodedConfig}`;
 
     const qrResponse = await axios.get(url, { responseType: "arraybuffer" });
+
     res.setHeader("Content-Type", "image/png");
     return res.status(200).send(qrResponse.data);
   } catch (err) {
