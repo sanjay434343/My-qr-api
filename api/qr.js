@@ -21,15 +21,16 @@ export default async function handler(req, res) {
 
   const config = {
     data,
-    config: {
-      body: "circular",
-      eye: "frame12",
-      eyeBall: "ball14",
-      bodyColor: "#000000",
-      bgColor: "#ffffff",
-      logo: "https://github.com/sanjay434343/My-qr-api/blob/main/logo.png?raw=true",
-      logoMode: "clean"
-    },
+   const config = {
+  body: "circular",
+  eye: "frame12",
+  eyeBall: "ball14",
+  bodyColor: "#000000",
+  bgColor: "#ffffff",
+  logo: "https://raw.githubusercontent.com/sanjay434343/My-qr-api/main/logo.png",
+  logoMode: "clean"
+};
+
     size: 300,
     download: false,
     file: "png"
