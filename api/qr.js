@@ -12,7 +12,9 @@ export default async function handler(req, res) {
     eye = "frame12",
     eyeBall = "ball14",
     bodyColor = "#000000",
-    bgColor = "#ffffff"
+    bgColor = "#ffffff",
+    eyeColor = "#000000",       // ✅ default to black
+    eyeBallColor = "#000000"    // ✅ default to black
   } = req.query;
 
   if (!data) {
@@ -24,10 +26,11 @@ export default async function handler(req, res) {
     eye,
     eyeBall,
     bodyColor,
-    bgColor
+    bgColor,
+    eyeColor,
+    eyeBallColor           // ✅ added here
   };
 
-  // Add logo if nologo is NOT true
   if (nologo !== "true") {
     qrConfig.logo = "https://raw.githubusercontent.com/sanjay434343/My-qr-api/main/logo.png";
     qrConfig.logoMode = "clean";
