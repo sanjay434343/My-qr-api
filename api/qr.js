@@ -88,8 +88,9 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
   
-  // Show documentation UI for root path
-  if (req.method === "GET" && (!req.query.data && Object.keys(req.query).length === 0)) {
+  // Show documentation UI for /docs path
+  if (req.method === "GET" && req.url === '/docs') {
+    res.setHeader('Content-Type', 'text/html');
     return res.status(200).send(getDocumentationHTML());
   }
   
@@ -251,21 +252,33 @@ export default async function handler(req, res) {
     qrConfig.logoPadding = "10";
   }
 
-  const apiUrl = `https://api.qrcode-monkey.com/qr/custom`;
-  const payload = {
-    data,
-    config: qrConfig,
-    size: sizeNum,
-    file: format.toLowerCase()
-  };
+  const apiUrl = `https://api.qrserver.com/v1/create-qr-code/`;
+  
+  // Build query parameters for alternative API
+  const queryParams = new URLSearchParams({
+    data: data,
+    size: `${sizeNum}x${sizeNum}`,
+    format: format.toLowerCase(),
+    ecc: errorCorrection || 'M',
+    margin: margin || '0'
+  });
+
+  // Add color parameters if not default
+  if (bodyColor !== '#000000') {
+    queryParams.append('color', bodyColor.replace('#', ''));
+  }
+  if (bgColor !== '#ffffff') {
+    queryParams.append('bgcolor', bgColor.replace('#', ''));
+  }
+
+  const finalUrl = `${apiUrl}?${queryParams.toString()}`;
 
   try {
-    const response = await axios.post(apiUrl, payload, {
+    const response = await axios.get(finalUrl, {
       responseType: "arraybuffer",
       timeout: 10000, // 10 second timeout
       headers: {
-        'User-Agent': 'QR-API-Service/1.0',
-        'Content-Type': 'application/json'
+        'User-Agent': 'QR-API-Service/1.0'
       }
     });
 
@@ -606,6 +619,11 @@ function getDocumentationHTML() {
             <div class="endpoint">
                 <span class="method get">GET</span>
                 <strong>${typeof window !== 'undefined' ? window.location.origin : ''}/api/qr?data=Hello%20World</strong>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>📖 Documentation:</strong>
+                <a href="/docs" style="color: #667eea; text-decoration: none; font-weight: bold;">${typeof window !== 'undefined' ? window.location.origin : ''}/docs</a>
             </div>
             
             <button class="try-it" onclick="tryExample('/api/qr?data=Hello%20World')">
