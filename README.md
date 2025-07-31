@@ -240,14 +240,12 @@ API_RATE_LIMIT=100
 ### File Structure
 ```
 qr-api/
-├── pages/
-│   └── api/
-│       └── qr.js          # Main API endpoint
-├── public/
-│   └── logo.png           # Default logo
+├── api/
+│   └── aqr.js         # Main API endpoint
+├── logo.png         # Default logo
 ├── package.json
 ├── README.md
-└── vercel.json           # Vercel configuration
+         # Vercel configuration
 ```
 
 ## 🔒 Security Features
