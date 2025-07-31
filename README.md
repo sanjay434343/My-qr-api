@@ -91,7 +91,7 @@ star
 Use values from:
 
 ```
-0 to 16
+Frame 0 to 16
 ```
 
 Example: `eye=0`, `eye=12`, `eye=16`
@@ -101,7 +101,7 @@ Example: `eye=0`, `eye=12`, `eye=16`
 Use values from:
 
 ```
-0 to 19
+Ball 0 to 19
 ```
 
 Example: `eyeBall=0`, `eyeBall=14`, `eyeBall=19`
