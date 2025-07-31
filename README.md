@@ -7,7 +7,7 @@ This is a **simple and customizable** QR Code generator API built using Node.js.
 ## 🔗 Live API Endpoint
 
 ```
-GET https://your-deployment-url.vercel.app/api/qr
+GET https://my-qr-api.vercel.app/api/qr
 ```
 
 ---
@@ -28,17 +28,33 @@ GET https://your-deployment-url.vercel.app/api/qr
 
 ## ✅ Example Usage
 
-### With default styles and logo
+### 🔘 With default styles and logo
 
 ```
-GET /api/qr?data=https://example.com
+/api/qr?data=https://example.com
 ```
 
-### Custom colors and no logo
+[▶️ Preview QR with Logo](https://my-qr-api.vercel.app/api/qr?data=https://example.com)
+
+---
+
+### 🔘 Without logo (nologo)
 
 ```
-GET /api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&nologo=true
+/api/qr?data=HelloWorld&nologo=true
 ```
+
+[▶️ Preview QR without Logo](https://my-qr-api.vercel.app/api/qr?data=HelloWorld&nologo=true)
+
+---
+
+### 🔘 Custom colors and styles
+
+```
+/api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&eye=frame2&eyeBall=ball2&body=dot
+```
+
+[▶️ Preview Custom QR](https://my-qr-api.vercel.app/api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&eye=frame2&eyeBall=ball2&body=dot)
 
 ---
 
@@ -62,12 +78,6 @@ GET /api/qr?data=HelloWorld&bodyColor=%23ff5733&bgColor=%23000000&nologo=true
 | 400    | Missing 'data'              | No data parameter was provided.    |
 | 405    | Method not allowed          | Only `GET` requests are supported. |
 | 500    | QR generation failed        | Internal API failure.              |
-
----
-
-## 🧪 Sample Output
-
-![Sample QR](https://raw.githubusercontent.com/sanjay434343/My-qr-api/main/sample.png)
 
 ---
 
