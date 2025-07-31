@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     bodyColor: "#000000",
     bgColor: "#ffffff",
     logo: "https://raw.githubusercontent.com/sanjay434343/My-qr-api/main/logo.png",
-    logoMode: "clean" // Adds round white background
+    logoMode: "default"
   };
 
   const apiUrl = `https://api.qrcode-monkey.com/qr/custom`;
